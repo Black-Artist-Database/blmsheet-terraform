@@ -16,3 +16,6 @@ resource "google_project_iam_member" "cloud-run-service-account" {
   member     = "serviceAccount:${google_service_account.cloud-run.email}"
   depends_on = [var.services]
 }
+
+data "google_compute_default_service_account" "default" {
+}

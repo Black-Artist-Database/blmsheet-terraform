@@ -28,9 +28,17 @@ provider "random" {
   version = "~> 2.3"
 }
 
+resource "random_password" "auth" {
+  length = 16
+  special = true
+  override_special = "_%@"
+}
+
 module "network" {
   source   = "./network"
   services = google_project_service.service
+  project  = var.project
+  region   = var.region
 }
 
 module "ssl" {
@@ -51,6 +59,19 @@ module "service-accounts" {
   services = google_project_service.service
 }
 
+module "firestore" {
+  source     = "./firestore"
+  services   = google_project_service.service
+  collection = var.collection
+  project    = var.project
+}
+
+module "pubsub" {
+  source     = "./pubsub"
+  services   = google_project_service.service
+  topic      = var.topic
+}
+
 module "compute" {
   source                = "./compute"
   image_name            = var.image_name
@@ -58,7 +79,35 @@ module "compute" {
   registry              = var.registry
   project               = var.project
   services              = google_project_service.service
-  service_account_email = module.service-accounts.cloud_run_email
+  service_account_email = module.service-accounts.default_account
   static_ip_name        = module.network.name
   ssl_cert_name         = module.ssl.name
+  vpc_link              = module.network.vpc_link
+  sheet_id              = var.sheet_id
+  tab_id                = var.tab_id
+  start_row             = var.start_row
+  topic                 = var.topic
+  basic_auth_pass       = random_password.auth.result
+  redis_url             = var.redis_url
+  collection            = var.collection
+}
+
+module "scheduler" {
+  source          = "./scheduler"
+  services        = google_project_service.service
+  project         = var.project
+  region          = var.region
+  timezone        = var.timezone
+  app_url         = module.compute.app_url
+  basic_auth_pass = random_password.auth.result
+}
+
+module "build" {
+  source          = "./build"
+  services        = google_project_service.service
+  project         = var.project
+  topic           = var.topic
+  image_name      = var.image_name
+  owner           = var.owner
+  repo            = var.repo
 }

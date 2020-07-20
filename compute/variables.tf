@@ -42,3 +42,36 @@ variable "ssl_cert_name" {
 variable "services" {
   description = "Google APIs and Services"
 }
+
+variable "vpc_link" {
+}
+
+variable "sheet_id" {
+  description = "Google Sheets ID of crowd-sourced list"
+  type        = string
+}
+
+variable "tab_id" {
+  description = "Literal name of tab from sheet"
+  type        = string
+}
+
+variable "start_row" {
+  description = "First entry in the sheet"
+}
+
+variable "basic_auth_pass" {}
+
+variable "collection" {
+    default             = "entries"
+}
+
+variable "topic" {
+}
+
+variable "timezone" {
+    default             = "Etc/UTC"
+}
+
+variable "redis_url" {
+}

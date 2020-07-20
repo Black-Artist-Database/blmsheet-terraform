@@ -4,9 +4,46 @@ resource "google_cloud_run_service" "multi-region-cloud-run" {
   location = element(var.locations, count.index)
 
   template {
+    # metadata {
+      # annotations = {
+        # "run.googleapis.com/vpc-access-connector" = var.vpc_link
+      # }
+    # }
     spec {
       containers {
         image = "${var.registry}/${var.project}/${var.image_name}:${var.image_version}"
+        env {
+          name  = "SHEET_ID"
+          value = var.sheet_id
+        }
+        env {
+          name  = "TAB_ID"
+          value = var.tab_id
+        }
+        env {
+          name  = "START_ROW"
+          value = var.start_row
+        }
+        env {
+          name  = "DB_NAME"
+          value = var.collection
+        }
+        env {
+          name  = "REDIS_URL"
+          value = var.redis_url
+        }
+        env {
+          name  = "PROJECT_ID"
+          value = var.project
+        }
+        env {
+          name  = "SCRAPE_TOPIC"
+          value = var.topic
+        }
+        env {
+          name  = "AUTH_PASS"
+          value = var.basic_auth_pass
+        }
         resources {
           limits = {
             cpu    = "1000m"

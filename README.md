@@ -1,7 +1,6 @@
-# Multi Region Cloud Run Terraform
-[![Build Status](https://travis-ci.org/robcharlwood/multi-region-cloud-run-terraform.svg?branch=master)](https://travis-ci.org/robcharlwood/multi-region-cloud-run-terraform/)
+# BLMSheet Terraform
 
-This repository contains the partner codebase for Rob Charlwood's Medium tutorial - ["Multi Region Load Balancing with GO and Google Cloud Run - Part 2"](https://medium.com/@bitniftee/multi-region-load-balancing-with-go-and-google-cloud-run-part-2-a30ac47eaaa4).
+This repository was inspired by Rob Charlwood's Medium tutorial - ["Multi Region Load Balancing with GO and Google Cloud Run - Part 2"](https://medium.com/@bitniftee/multi-region-load-balancing-with-go-and-google-cloud-run-part-2-a30ac47eaaa4) and acts as the partner of and infrastructure for the Google Run application ["BLMSheet"](https://github.com/jcox-dev/blmsheet).
 
 ## Checkout and setup
 To work with this codebase, you will require the below to be setup and configured on your machine.
@@ -12,8 +11,8 @@ To work with this codebase, you will require the below to be setup and configure
 To set this codebase up on your machine, you can run the following commands:
 
 ```bash
-git clone git@github.com:robcharlwood/multi-region-cloud-run-terraform.git
-cd multi-region-cloud-run-terraform
+git clone git@github.com:jcox-dev/blmsheet-terraform.git
+cd blmsheet-terraform
 ```
 
 Next up, You'll need your terraform service account key from part 1 of the tutorial placed into a ``.keys`` directory in the root of
@@ -50,23 +49,14 @@ terraform apply
 ## For those interested
 For people with a curious nature, the main meat of the infrastructure that makes multi region load balancing possible lies [here](https://github.com/robcharlwood/multi-region-cloud-run-terraform/blob/master/compute/main.tf#L45-L154).
 
-
-## Continuous Integration
-
-This project uses [Travis CI](http://travis-ci.org/) for continuous integration. This platform runs the project tests automatically when a PR is raised or merged.
-
 ## Versioning
 
-This project uses [git](https://git-scm.com/) for versioning. For the available versions,
-see the [tags on this repository](https://github.com/robcharlwood/multi-region-cloud-run-terraform/tags).
+This project uses [git](https://git-scm.com/) for versioning.
 
 ## Authors
 
-* Rob Charlwood - Bitniftee Limited
-
-## Changes
-
-Please see the [CHANGELOG.md](https://github.com/robcharlwood/multi-region-cloud-run-terraform/blob/master/CHANGELOG.md) file additions, changes, deletions and fixes between each version
+* Jamie Cox
+* Rob Charlwood - Bitniftee Limited (original)
 
 ## License
 

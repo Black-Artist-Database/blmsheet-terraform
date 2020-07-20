@@ -6,7 +6,12 @@ variable "project_services" {
     "logging.googleapis.com",
     "dns.googleapis.com",
     "run.googleapis.com",
-    "compute.googleapis.com"
+    "compute.googleapis.com",
+    "firestore.googleapis.com",
+    "cloudscheduler.googleapis.com",
+    "cloudbuild.googleapis.com",
+    "vpcaccess.googleapis.com",
+    "sheets.googleapis.com"
   ]
   description = "List of services to enable on the project."
 }
@@ -39,4 +44,41 @@ variable "image_version" {
 variable "domain" {
   type        = string
   description = "Your root domain without prefixes e.g example.com"
+}
+
+variable "sheet_id" {
+  description = "Google Sheets ID of crowd-sourced list"
+  type        = string
+}
+
+variable "tab_id" {
+  description = "Literal name of tab from sheet"
+  type        = string
+}
+
+variable "start_row" {
+  description = "First entry in the sheet"
+}
+
+variable "collection" {
+    default             = "entries"
+}
+
+variable "topic" {
+    default             = "scrape"
+}
+
+variable "timezone" {
+    default             = "Etc/UTC"
+}
+
+variable "redis_url" {
+}
+
+variable "owner" {
+    default             = "jcox-dev"
+}
+
+variable "repo" {
+    default             = "blmsheet"
 }

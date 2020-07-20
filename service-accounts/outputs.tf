@@ -7,3 +7,7 @@ output "cloud_run_key" {
   value       = google_service_account_key.cloud-run-key.private_key
   description = "JSON key for the Cloud Run service account"
 }
+
+output "default_account" {
+  value = data.google_compute_default_service_account.default.email
+}
