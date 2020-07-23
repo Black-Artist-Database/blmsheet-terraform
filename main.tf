@@ -80,6 +80,7 @@ module "compute" {
   project               = var.project
   services              = google_project_service.service
   service_account_email = module.service-accounts.default_account
+  static_ip             = module.network.static_ip
   static_ip_name        = module.network.name
   ssl_cert_name         = module.ssl.name
   vpc_link              = module.network.vpc_link
