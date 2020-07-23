@@ -29,6 +29,10 @@ variable "service_account_email" {
   type        = string
 }
 
+variable "static_ip" {
+  
+}
+
 variable "static_ip_name" {
   description = "Name of the static IP resource"
   type        = string

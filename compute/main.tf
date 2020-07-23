@@ -82,6 +82,28 @@ resource "google_cloud_run_service_iam_policy" "cloud-run-no-auth-policy" {
 }
 
 
+// add a load balancer for redirecting HTTP -> HTTPS
+resource "google_compute_url_map" "http-url-map" {
+  name = "${var.image_name}-http-map"
+  default_url_redirect {
+    https_redirect = true
+    redirect_response_code = "MOVED_PERMANENTLY_DEFAULT"
+    strip_query = false
+  }
+}
+
+resource "google_compute_target_http_proxy" "default" {
+  name    = "${var.image_name}-http-proxy"
+  url_map = google_compute_url_map.http-url-map.id
+}
+
+resource "google_compute_global_forwarding_rule" "default" {
+  name                = "${var.image_name}-http-content-rule"
+  ip_address          = var.static_ip
+  port_range          = "80"
+  target              = google_compute_target_http_proxy.default.id
+}
+
 // handle the infrastructure that is not yet fully configurable or compatible with terraform
 // The destroy code here isn't perfect since external references from destroy provisioners are deprecated.
 // However, this code is just temporary until we can provision this with actual terraform resources,
