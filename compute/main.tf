@@ -47,7 +47,7 @@ resource "google_cloud_run_service" "multi-region-cloud-run" {
         resources {
           limits = {
             cpu    = "1000m"
-            memory = "256M"
+            memory = "512M"
           }
         }
       }
